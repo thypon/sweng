@@ -1,0 +1,56 @@
+\documentclass[a5paper]{article}
+
+% Load packages
+\usepackage{polyglossia}
+\setdefaultlanguage[babelshorthands]{italian}
+
+% Set the title
+\author{Andrea Brancaleoni}
+\title{Lezione2}
+\date{2012/03/06 12:35:29}
+
+% Start Document
+\begin{document}
+  \maketitle
+
+  \section{Programmazione ad oggetti}
+    Più il linguaggio è tipizzato più ci aiuta ad evitare problemi. In un linguaggio fotemente atipizzato
+
+    \begin{code}
+      Data d;
+      int g;
+      d = g; // Illegale.
+    \end{code}
+
+    Errori di questo tipo sono rilevati a compile time e non a runtime. Il controllo dei tipo, secondo il professore, è un vantaggio, direttamente in fase di compilazione. Ci sono molti linguaggi che sonon molto poco tipizzati.
+
+    \subsection{Le modifiche sono costose}
+      \begin{itemize}
+        \item una modifica ad una struttura comporta tante altre piccole modifiche a meno di mascherare le strutture
+        \item fare tante piccole modifiche è
+          \begin{itemize}
+            \item fonte di errori
+            \item lungo e costoso
+            \item difficile se la documentazione è cattiva
+          \end{itemize}
+        \item la realizzazione interna è una delle parti più soggette a cambiamenti, una volta che ho una interfaccia la struttura interna la posso nascondere in modo da poterla modificare successivamente senza dover modificare ulteriormente il codice dipendente dall'interfaccia precedentemente definita.
+      \end{itemize}
+
+      Con un linguaggio ad oggetti se non rispettiamo le interffacce e i tipi, diversamente da uno che non lo è, non compiliamo.
+
+    \subsection{ADT}
+      Astrazion sui dati che non classifica i dati in base alla lora rappresentazione. Il comportamento dei dati è espesso in termini di operazioni.
+
+      Esporta:
+        \begin{itemize}
+          \item il nome del tipo
+          \item l'interfaccia
+        \end{itemize}
+      Nasconde:
+        \begin{itemize}
+          \item la struttura del tipo
+          \item l'implementazione delle operazioni
+        \end{itemize}
+
+\end{document}
+

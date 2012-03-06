@@ -1,0 +1,133 @@
+\documentclass[a5paper]{article}
+
+% Load packages
+\usepackage{polyglossia}
+\setdefaultlanguage[babelshorthands]{italian}
+
+% Set the title
+\author{Andrea Brancaleoni}
+\title{Lezione1}
+
+% Start Document
+\begin{document}
+  \maketitle
+
+  \section{Introduzione}
+    Luciano Baresi <baresi@elet.polimi.it>
+
+    21 Giugno - termine delle lezioni.
+
+    \subsection{Organizzazione}
+      Inizia all'ora e mezza e finisce all'ora.
+
+      Il professore si chiama Luciano Baresi <baresi@elet.polimi.it>. Esercitatore, Giordano Tamburelli <tamburelli@elet.polimi.it>. Responsabile di laboratorio, <filieri@elet.polimi.it>.
+
+    \subsection{Obiettivi}
+      Due esami diversi
+
+      \begin{enumerate}
+        \item Ingegneria del Software
+        \item Corso di prova finale
+      \end{enumerate}
+
+    \subsection{Ingegneria del SW}
+      Lezione: 42h
+      Esercitazione: 28h
+
+      Corso universitario classico. Lezioni + Esercitazioni (esercitatore giordano tamburrelli), prova scritta. Non ci sono prove in itinere. La sospensione di metà semestre è vacanza. L'orale si fa in 2 casi, o nel caso dubito la fonte della saggezza nel compito, voti alti 28-29-30. L'orale viene fatto o durante il ritiro del compito.
+
+    \subsection{Prova finale}
+      Esercitazione: 16h
+      Laboratorio: 32h
+
+      Voto di prova finale. Storicamente esisteva la tesi di laurea. Ora 180crediti + 3crediti di prova finale. Verrà consegnato un progetto e saremo tenuti a consegnare solo quello. Quest'anno è stato scelto di proporre 2 progetto che varranno la stessa cosa. Uno sarà un progetto classico. Un altro progetto sarà invece per Android.
+
+      Il progetto va da 1-3 persone.
+
+    \subsection{Orario}
+      Lunedi (D 0.3) - 13.15 -> 15.15
+      Martedì (EG7) - 12.15 -> 16.15 Laboratorio
+      Mercoledì (D 1.1) - 10.15 -> 12.15
+      Venerdì (L26.12) - 8.15 -> 12.15
+
+    \subsection{Materiale didattico}
+      I corsi non sono basati su un unico libro di testo. tutto il materiale didattico si trova su
+      <http://home.dei.polimi.it/baresi>
+
+      Serie di documenti, copie dei lucidi + temi d'esame degli anni passati.
+
+      I PDF dei lucidi saranno disponibili in rete almeno un giorno prima della lezione.
+
+    \subsection{Ricevimento degli studenti}
+      Preferisce ricevimento via mail con appuntamento. interno 3638. L'ufficio non è dove c'è il dipartimento del DEI. L'ufficio sta al terzo piano dove ci sono le segreterie.
+
+    \subsection{Programma}
+      \begin{itemize}
+        \item Introduzione a Java, linguaggi di programmazione ad oggetti. Programmi potenzialmente distribuiti. Programmazione di interfacce utente.
+        \item Progetto 
+        \item Parte più teorica di ingegneria del software, verrà insegnato a progettare del software.
+        \item UML. UML distilled, libro di testa. UML dalla versione 2.x. Parleremo successivamente di specifica. Per fare questo usiamo 2 strumenti, Liskov libro, più teorico che pratico (controllare sulla pagina web).
+        \item Java Modelling Language.
+      \end{itemize}
+
+    \subsection{Libri di testo}
+      Esistono più libri di testo. O un manuale di Java oppure un libro che oltre a dire qual'è il linguaggio insegni anche a programmare ad oggetti. L'unica cosa è che il libro sia almeno quello aggiornato alla versione 6.
+
+      Ce ne sono alcuni abbastanza famosi. Ce ne sono molti, Thinking in Java è molto citato ma non è molto indicato per chi incomincia a programmare ad oggetti. Di base ce ne sono a centinaia.
+
+  \section{Ingegneria del Software}
+    \begin{itemize}
+      \item settore dell'informatica che studia sistemi.
+        \begin{itemize}
+          \item complessi e di grandi dimensioni
+          \item nati dal lavoro del gruppo
+        \end{itemize}
+      \item caratterizzazione di questi sistemi.
+        \begin{itemize}
+          \item esistono in diverse versioni
+          \item hanno durata i anni
+          \item sono soggetti a frequenti modifiche.
+        \end{itemize}
+    \end{itemize}
+
+    Dal punto di vista degli utenti è inquietante, mentre per l'ingegneria del software è stupendo. lol. <Esempio strano del freno dell'auto, solito esempio noioso>. Riuscire a fare software di qualità risulta sempre più importante quando lo usiamo su oggetti che non sono software.
+
+    Quando parliamo di ingegneria cerchiamo delle regole per mantenere strutture di grandi dimensioni. Purtroppo nel mondo del software c'è ancora la diceria per cui se uno è bravo fa del software buono, altrimenti fa software che fa schifo.
+
+    In realtà l'ingegneria del software riguarda tecniche per prevedere e mantenere sotto controllo i costi. Un approccio sistematico allo sviluppo, alla messa in opera, e alla manutenzione del software.
+
+    \subsection{Prodotti di qualità}
+      Ad esempio nelle norme ISO la 4106 certifica la qualità del software. Nell'ingegneria del software è molto più importanta il processo industriale.
+
+    \subsection{Ingegneria}
+      Bisogna distinguere tra programmatori e Ingegneria. In generale l'ingegnere informatico dovrebbe essere capace o di programmare ma avrà anche la possibilità di avere una visione di insieme del progetto grazie a i corsi generalisti. Tante volte si distingue tra quello che è un progetto normale e un progetto innovativo.
+
+      Troppo spesso esistono un sacco di faccendieri e pochi professionisti dell'informatica. La distinzione è più tra un progetto assurdo e da persone con una conoscenza specifica.
+
+      \subsubsection{Ingegneria Tradizionale}
+        Generalmente prevale il progetto di routine. Anche in informatica si fa come nelle altre ingegnerie adattando strutture pre esistente, tuttavia non esiste la stessa storia.
+
+      \subsubsection{Ingegneria del software}
+        La materia prima è gratuita o comunque è un costo affondato. L'unico costo del software è il personale che l'ha pensato e ragionato. Mentre se guardiamo una casa bifamiliare o un grattacielo la complessità è palese. Nel software la complessità non si manifesta chiaramente. Non abbiamo un modo evidente per stimare la complessità, sta tutta dietro le quinte. Il software differentemente dal resto non si usura. Il software non è corretto quando lo si usa la prima volta ma bisogna usarlo più tempo perchè questi si manifestino. Mentre la manutenzione di casa o dell'auto è dovuta a cause accidentali o a usura la manutenzione del software è da ricercare in bug pregressi all'interno del software.
+
+        Abbiamo il problema di riuscire ad essere degli ingegnerie senza avere tutta la storia pregressa delle altre ingegnerie.
+
+        Esempio: presa una macchina Premium, oggi (2004), il .90 dell'innovazione è data dagli stopper e dall'elettronica. Una macchina di classe 3, BMW ha circa 70 ECU. Oggi visto che tutto viene fatto dal software le varie parti dell'automobile viene accoppiata alle altre. Un sistema completamente verticale che va dal comando del finestrino ai giri del motore.
+
+        Altro Esempio: si può fare sempre di più con elementi integrati come telefonini e co.
+
+    \subsection{Complessità, criticità, dimensione}
+      Aggiungere persone può ritardare un progetto e rallentare ulteriormente la produzione. Ha sicuramente un costo e può essere un problema. Se noi vogliamo risolvere il progettino della prova finale o fare un sito, probabilmente non serve un progetto ingegneristico. Progettini ce ne sono molti in questo periodo.
+
+      \subsubsection{Chaos Report}
+        molti pochi progetti software vengono cancellati, pochi vengono iniziati e terminati.
+
+  \section{Finale}
+    Il problema non è quello di fare quello che è bello, ma fare qualcosa di completamente funzionante. Bisogna sempre valutare il costo di un eventuale problema. Una volta nessuno avrebbe pensato di fare un bonifico via web, ormai ci sono banche che sono solo online. Ci sono degli aerei che sono controllati solo da software. Nel sud-est asiatico c'è stato un incidente aereo dove non si è mai appurato se fosse stato un fail dell'hardware o del software. Prima c'erano sia una componente HW che fallbacka il SW sia il contrario. Più si andrà avanti più sarà verticale l'integrazione.
+
+    Problema più stupido. Software di fatturazione. Problemi che non si risolvono solo con la programmaione. Sia la parte algoritmica che la parte di progettazione sono importantissimi.
+
+    Domani JAVA.
+        
+\end{document}
+
