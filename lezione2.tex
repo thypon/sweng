@@ -1,8 +1,10 @@
 \documentclass[a5paper]{article}
 
 % Load packages
-\usepackage{polyglossia}
-\setdefaultlanguage[babelshorthands]{italian}
+\usepackage[latin1]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[italian,english]{babel}
+\usepackage{listings}
 
 % Set the title
 \author{Andrea Brancaleoni}
@@ -14,15 +16,15 @@
   \maketitle
 
   \section{Programmazione ad oggetti}
-    Più il linguaggio è tipizzato più ci aiuta ad evitare problemi. In un linguaggio fotemente atipizzato
+    Più il linguaggio è tipizzato più ci aiuta ad evitare problemi. In un linguaggio fortemente tipizzato
 
-    \begin{code}
+    \begin{lstlisting}
       Data d;
       int g;
       d = g; // Illegale.
-    \end{code}
+    \end{lstlisting}
 
-    Errori di questo tipo sono rilevati a compile time e non a runtime. Il controllo dei tipo, secondo il professore, è un vantaggio, direttamente in fase di compilazione. Ci sono molti linguaggi che sonon molto poco tipizzati.
+    errori di questo tipo sono rilevati a compile time e non a runtime. Il controllo dei tipo, secondo il professore, è un vantaggio. Ci sono molti linguaggi che sono molto poco tipizzati, ad esempio ruby o python.
 
     \subsection{Le modifiche sono costose}
       \begin{itemize}
@@ -40,7 +42,8 @@
 
     \subsection{ADT}
       Astrazion sui dati che non classifica i dati in base alla lora rappresentazione. Il comportamento dei dati è espesso in termini di operazioni.
-
+      
+      Un ADT,
       Esporta:
         \begin{itemize}
           \item il nome del tipo
