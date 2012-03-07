@@ -4,6 +4,7 @@
 \usepackage[latin1]{inputenc}
 \usepackage[T1]{fontenc}
 \usepackage[italian,english]{babel}
+\usepackage{listings}
 
 % Set the title
 \author{Andrea Brancaleoni}
@@ -20,7 +21,7 @@
     Per duplicare un oggetto ho bisogno di copiare a uno a uno i campi semplici. Le String poichè immutabili tuttavia hanno l'efficienza dei ref e la comodità dei tipi base.
 
   \section{Attributi}
-    \begin{enumeration}
+    \begin{itemize}
       \item possiamo accedere a tutti gli oggetti della classe se è definito l'attributo statico.
       \item Tutti gli oggetti possono accedere agli attributi statici e tutti possono modificarlo
       \item usato ad esempio quando si vuole mettere un contatore (per esempio di istanza)
@@ -33,7 +34,20 @@
         Altrimenti può accedere sia ai campi statici che non.
 
         P.S. Non usare printf, ha fatto interdere che non gli andrebbe bene.
-    \end{enumeration}
+    \end{itemize}
+E
+  \section{Esempi}
+    \lstinputlisting{classi/lezione3/Automobile.java}
+    \lstinputlisting{classi/lezione3/Automobile2.java}
+    \lstinputlisting{classi/lezione3/AutomobiliConst.java}
+    \lstinputlisting{classi/lezione3/Data.java}
+    \lstinputlisting{classi/lezione3/Data2.java}
+    \lstinputlisting{classi/lezione3/Data3.java}
+    \lstinputlisting{classi/lezione3/Disc.java}
+    \lstinputlisting{classi/lezione3/EnumerationExamples.java}
+    \lstinputlisting{classi/lezione3/HelloWorld.java}
+    \lstinputlisting{classi/lezione3/InsiemeDiInteri.java}
+    \lstinputlisting{classi/lezione3/Shape.java}
 
   \section{IO}
     La funzione println fa introspection sui tipi dati.
@@ -42,7 +56,7 @@
     Dalla versione 6 di Java si possono creare dei tipi enumerati, sono immutabili e non istanziabili
 
   \section{End}
-    Alla prossima puntata.
+    Alla prossima puntata. Overloading di metodi la prossima volta.
 
 \end{document}
 
