@@ -19,6 +19,30 @@
 
     Per duplicare un oggetto ho bisogno di copiare a uno a uno i campi semplici. Le String poichè immutabili tuttavia hanno l'efficienza dei ref e la comodità dei tipi base.
 
-  \section{Visibilità dei nomi}
+  \section{Attributi}
+    \begin{enumeration}
+      \item possiamo accedere a tutti gli oggetti della classe se è definito l'attributo statico.
+      \item Tutti gli oggetti possono accedere agli attributi statici e tutti possono modificarlo
+      \item usato ad esempio quando si vuole mettere un contatore (per esempio di istanza)
+      \item Possiamo fare la stessa cosa per i metodi, un metodo è statico quando può essere invocato se non c'è bisogno di un oggetto a se associato per essere invocato. Per questo motivo all'interno di esso non è definito l'oggetto $this$.
+        \begin{itemize}
+          \item potremmo o invocarlo all'interno delle funzioni dei metodi, oppure dovremmo usarlo premettendo il nome della classe, <NomeClasse>.<Nomemetodo>
+          \item oppure potremmo chiamare il metodo statico solo col suo nome. Esattamente come una funzione.
+        \end{itemize}
+        Un metodo static può accedere ai soli attributi e metodi (campi) statici della classe
+        Altrimenti può accedere sia ai campi statici che non.
+
+        P.S. Non usare printf, ha fatto interdere che non gli andrebbe bene.
+    \end{enumeration}
+
+  \section{IO}
+    La funzione println fa introspection sui tipi dati.
+
+  \section{Enum}
+    Dalla versione 6 di Java si possono creare dei tipi enumerati, sono immutabili e non istanziabili
+
+  \section{End}
+    Alla prossima puntata.
+
 \end{document}
 
