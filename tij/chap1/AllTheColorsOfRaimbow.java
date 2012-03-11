@@ -4,7 +4,8 @@
  */
 
 public class AllTheColorsOfRaimbow {
-
+    private int anIntegerRepresentingColors;
+    
     /**
      * Constructor for AllTheColorsOfRaimbow
      */
@@ -12,5 +13,13 @@ public class AllTheColorsOfRaimbow {
         
     }
 
+    /**
+     * Method Description
+     * 
+     * @return 
+     */
+    public void changeTheHueOfTheColor(int newvalue) {
+        this.anIntegerRepresentingColors = newvalue;
+    }
 }
 
