@@ -1,0 +1,288 @@
+\documentclass[a5paper]{article}
+
+% Load packages
+\usepackage[latin1]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[italian,english]{babel}
+\usepackage{listings}
+
+% Set the title
+\author{Andrea Brancaleoni}
+\title{Lezione5}
+\date{2012/03/12 13:35:38}
+
+% Start Document
+\begin{document}
+  \maketitle
+
+  \section{Overloading di metodi}
+    \begin{itemize}
+      \item All'interno della stessa classe possono esservi più metodi con lo stesso nome purchè si distinguano per numero e/o tipo di parametri. Il tipo tuttavia non basta a distinguere due metodi.
+      \item L'intestazione di un metodo comprende il numero, il tipo e la posizione dei parametri; non include il tipo del valore restituito.
+      \item Utile per definire funzioni con codice differente ma con effetti simili su tipi diversi.
+    \end{itemize}
+
+    Noi sovraccarichiamo il nome, mentre in C il nome era identificatore di un comportamento. Quin dando solo il nome non siamo in grado di definire il comportamento ma dobbiamo pure conoscere i suoi parametri.
+
+    Molto interessante per un linguaggio ad oggetti per overload del costruttore ad esempio.
+
+    \begin{lstlisting}
+      public class Prova {
+          public int max(int a, int b, int c) { . . . }
+          public double max(double a, double b) { . . . }
+          public int max(int a, int b) { . . . }
+      }
+    \end{lstlisting}
+
+    Ogni volta viene chiamata la funzione giusta
+
+    \begin{lstlisting}
+      public static void main(String[] args) {
+        Prova p = new Prova();
+
+        p.max(2, 3, 5);
+        p.max(2.3, 3.14);
+        p.max(2, 3);
+      }
+    \end{lstlisting}
+
+    \section{Costruzione e Distruzione}
+      \begin{itemize}
+        \item I costruttori spesso utilizzano l'overload
+        \item Svolge 2 ruoli:
+          \begin{itemize}
+            \item Alloca la memoria
+            \item Da dei valori vagamente significativi
+          \end{itemize}
+        \item A differenza del C, in Java non è necessario deallocare esplicitamente gli oggetti
+      \end{itemize}
+
+      Esempio:
+
+      \begin{lstlisting}
+        public Data(int g, int m, int a) {
+          giorno = g;
+          mese = m;
+          anno = a;
+        }
+      \end{lstlisting}
+
+      Il costruttore è un metodo come tutti gli altri che ha come parametri i parametri dati, e all'interno del corpo dovremmo andare a inizializzare i valori degli attributi di quel progetto. Nel momento in cui andiamo ad invocare il costruttore l'allocazione della memoria avverrà in automatcio, dentro al costruttore andiamo a definire come gli attributi devono essere gestiti.
+
+      In Java possiamo avere tutti i costruttori che ci interessano. Con la regola che il costruttore si deve chiamare con la stesso nome della classe. Tutto questo lo si può fare come lo riteniamo più opportuno. L'unica convezione di java  la seguente: se non dichiariamo costruttori il costruttore di default sarà invocato.
+
+      Esempio:
+
+      \begin{lstlisting}
+        public class C {
+          private int i1, i2;
+        }
+
+        public static void main(String[] args) {
+          C x = new C();
+          x = new C(2,3); // Sbagliato
+        }
+      \end{lstlisting}
+
+      Tuttavia appena definisco un costruttore perdo il costruttroe di default.
+
+      \begin{lstlisting}
+        public class Automobile {
+          private String colore, marca, modello;
+          private int cilindrata, numPorte;
+          private boolean acceso;
+
+          public Automobile(String col, String mar, String mod) {
+            colore = col;
+            marca = mar;
+            modell = mod;
+          }
+
+          public Automobile() {
+            colore = marca = modello = null;
+            cilindrata = numPorte = 0;
+          }
+          . . .
+        }
+      \end{lstlisting}
+
+      \begin{itemize}
+        \item È possibile invocare un costruttore dall'interno di un altro tramite la notazione this.metodo.
+        \item Tuttavia this devee esser e la prima istruzione
+      \end{itemize}
+
+      \begin{lstlisting}
+        import java.util.Calendar;
+
+        . . .
+
+        public Data(int g , int m, int a) {
+          if (dataValida(g, m, a)) { // dataValida è un metodo statico.
+            giorno = g;
+            mese = m;
+            anno = a;
+          } else . . .
+        }
+
+        . . .
+
+        public Data(int g, int m) { // Prende giorno e mese che vogliamo e l'anno corrente
+          this(g, m, Calendar.getInstance().get(Calendar.YEAR)); // Il terzo parametro restituisce l'anno corrente.
+        }
+      \end{lstlisting}
+
+
+    \section{Operatore di confronto}
+      L'operatore di confronto == confronta i valori di riferimenti e non degli oggetti. Se noi abbiamo delle variabili non referenza andiamo a confrontare le variabili in caso contrario andiamo a confrontare i riferimenti.
+
+      \begin{lstlisting}
+        Data d1 = new Data(1, 12, 2001);
+        Data d2 = new Data(1, 12, 2001);
+
+        if (d1 == d2) { // false poiche i due oggetti sono diversi, test di identità
+          . . .
+        }
+
+        // La stessa cosa quando assegiamo i due oggetti uno sull'altro.
+
+        d1 = d2;
+
+        // Con gli oggetti generalmente si preferisce chiamare il metodo .equals.
+
+      \end{lstlisting}
+
+      \subsection{Confronto di uguaglianza}
+        \begin{itemize}
+          \item Metodo equals consente di confrontare se due oggetti sono uguali (nel senso che hanno lo stesso valore). E' un test di uguaglianza mentre == è un test di identità. Tuttavia non sempre esiste una relazione di equivalenza ovvia tra classi autodefinite. Metaforicamente, Fa un confronto ancora tra valori e riferimenti uno a uno. Nella pratica controlla prima l'identità per rapidità e poi l'uguaglianza.
+          \item Dice se due oggetti sono equivalenti.
+        \end{itemize}
+
+        \begin{lstlisting}
+          String s1 = ``Luciano'';
+          String s2 = ``Giovanni'';
+
+          s1.equals(s2); // False
+          String a = new String(``Ciao'');
+          String b = new String(``Ciao'');
+          a.equals(b);
+        \end{lstlisting}
+
+  \section{Tipi riferimento e tipi primitivi}
+    \begin{itemize}
+      \item i tipi primitivi sono comodi, ma a volte è comodo usarli come riferimento per omogeneità
+      \item Java fornisce delle classi predefinite.
+        \begin{itemize}
+          \item Integer, Character, Float, Long, Short, Double
+          \item Un oggetto Integer contiene un int, ma viene inizializzato solo con i costruttori, la classe Integer è immutabile.
+        \end{itemize}
+    \end{itemize}
+
+    Esempio:
+    \begin{lstlisting}
+      Integer i; // Il default è null
+      i = new Integer(5); // i è un rif. a un oggetto che contiene 5
+      Integer x = i; // Due riferimenti che puntano allo stesso oggetto il cui contenuto è 5
+      int y = x.intValue(); // Vecchio metodo
+      i = y; // boxing automatico
+      y = i; // unboxing automatico
+      i = 3; // stessa cosa di sopra.
+    \end{lstlisting}
+
+  \section{Catene puntate}
+    un metodo può avere tre risultati:
+    \begin{itemize}
+      \item O non restituisce nulla (void), magari side effect
+      \item oppure può restituire un valore
+      \item ritorna this, in questo caso è possibile la catena di invocazione.
+    \end{itemize}
+
+    Esempio:
+    \begin{lstlisting}
+      System.out.println(); // out è un attributo pubblico (statico) di classe System
+      // La classe di out fornisce il metodo println();
+
+      String b = new String(``Ciao'');
+      String a = b.substring(1).substring(2);
+      System.out.pringln(a);
+
+      // L'operatore . è associativo a sinistra
+    \end{lstlisting}
+
+    \begin{lstlisting}
+      public class Persona {
+        private String name;
+        private Persona padre;
+
+        private int età;
+
+        public Persona(String n) {
+          name = n; padre = null; età = 0;
+        }
+
+        public void setPadre(Persona p) {
+          padre = p;
+        }
+
+        public void setAta(int e) { eta = e; }
+      }
+
+      public class Esempio {
+        public static void main(String[] args) {
+          Persona paolo, pietro;
+          int i = 20;
+          paolo = new Persona(``Paolo'');
+          paolo.setEta(i);
+          i = 30;
+          pietro = new Persona(``Pietro'');
+          pietro.setEta(i);
+          paolo.setPadre(pietro);
+          pietro.setEta(i + 1);
+        }
+      }
+    \end{lstlisting}
+
+    \section{Ereditarietà}
+      Il professore insiste a chiamarlea ereditarietà e non eredità, immagino non voglia vedere la parola eredità nel compito.
+      \begin{itemize}
+        \item è possibile stabilire una relazione di ``sottoclassi di'' fra le classi di un programma Java
+          \begin{itemize}
+            \item Relazione d'ordine parziale (riflessiva e transitiva)
+            \item public class B extends A { \ldots } // Dal punto di vista sintattico.
+          \end{itemize}
+        \item A classe base o antenato o padre o superclasse
+        \item B è classe figlia discendente o semplicemente sottoclasse
+      \end{itemize}
+
+      Quando andremo a definire B se la deriveremmo da A andremmo solo a definire le differenze dalla classe A.
+
+      \subsection{Relazione di ereditarietà}
+        \begin{itemize}
+          \item La sottoclasse eredita tutta l'implementazione (attributi e metodi) della superclasse. Gli attributi e metodi della superclasse sono implicitamente definiti anche nella sottoclasse. Se andassimo per errore a definire nella sottoclasse un attributo con lo stesso nome della sottoclasse ci troveremmo con due attributi con lo stesso nome.
+          \item Una sottoclasse può aggiungere nuovi attributi, nuovi metodi ma può anche ridefinire i metodi che eredita dalla sueprclasse, ovviamente i metodi devono invariare numero e tipo dei parametri (ciò è detto overriding).
+        \end{itemize}
+
+        Esempio:
+        \begin{lstlisting}
+          public class Automobile {
+            private String modello;
+            private boolean accesa;
+            public Automobile(String modello) {
+              this.modello = modello;
+              this.accesa = false;
+            }
+
+            public void accendi() {accesa = true;}
+            public boolean puoPartire() { return accesa; }
+          }
+
+          public class AutomobileElettrica extends Automobile {
+            public void ricarica() {}
+          }
+        \end{lstlisting}
+
+        Gerarchia a più livelli, in java il figlio può avere al più un padre.
+        // Disegno1
+
+
+\end{document}
+

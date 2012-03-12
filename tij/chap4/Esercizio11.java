@@ -28,13 +28,17 @@ public class Esercizio11 {
      * Main method
      **/
     static public void main(String[] args) {
-//            Esercizio11 e1, e2;
-            new Esercizio11();
-            new Esercizio11();
-//            e1.newRef(e2);
-//            e2.newRef(e1);
-
-        System.gc();
+        {
+            Esercizio11 e1, e2;
+            e1 = new Esercizio11();
+            e2 = new Esercizio11();
+            e1.newRef(e2);
+            e2.newRef(e1);
+        }
+        
+        while (true) {
+            System.gc();
+        }
     }
 
 }
