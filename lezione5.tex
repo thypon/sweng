@@ -1,0 +1,162 @@
+\documentclass[a5paper]{}
+
+% Load packages
+\usepackage[latin1]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[italian,english]{babel}
+
+% Set the title
+\author{Andrea Brancaleoni}
+\title{Lezione5}
+\date{2012/03/13 12:34:01}
+
+% Start Document
+\begin{document}
+  \maketitle
+
+  \section{Overriding}
+    una sottoclasse può ridefinire l'implementazione di un metodo, tuttavia:
+    \begin{itemize}
+      \item L'intestazione del metodo non deve cambiare
+      \item \sout{L'intestazine non unclude il tipo retituito, che quindi può cambiare con la regola della covarianza.} Non la vedremo durante il corso quindi useremo la prima delle due regole
+    \end{itemize}
+
+    \begin{lstlisting}
+      public class AutomobileElettrica extends Automobile {
+        private boolean batterieCariche;
+        public voi ricarica() { batterieCariche = true; }
+          . . .
+
+        /* @override */
+
+        public void accendi() {
+        }
+      }
+    \end{lstlisting}
+
+    Esiste anche la possibilità di ridefinire un metodo con lo stesso nome del metodo ereditario ma con intestazione diversa non avremmo un caso di overriding ma piuttosto un caso di overloading.
+
+  \section{Super}
+    In java abbiamo anche un'altra variabile speciale oltre a this. Il suo nome è super ed è il modo per accedere da un sottometodo della sottoclasse ai metodi della superclasse.
+
+    E' possibile anche usarlo all'interno del costruttore richiamando super (senza riferimento a metodi della classe) applicato negli argomenti desiderati dal padre.
+
+  \section{Object}
+    Ogni classe che noi definiamo eredità in maniera
+
+    La classe Object definisce i seguenti metodi:
+    \begin{itemize}
+      \item public boolean equals(Object);
+      \item public String toString();
+      \item public Object clone();
+    \end{itemize}
+
+  \section{String}
+    L'implementazione in Java delle stringhe, ha una serie di metodi predefiniti ed è immutabile.
+
+    \begin{lstlisting}
+      public class ProvaString {
+        String a = new String(); // a e' un riferimento alla stringa vuota
+        String b = new String(``Ciao''); // b e' il riferimento alla stringa 'ciao'
+        String c = new String(b); // b e' una nuova stringa il cui contenuto e' uguale a quello di b
+        String d = b; // d e' la stringa b
+        System.out.println(b + `` '' + c + `` '' + d);
+      }
+    \end{lstlisting}
+
+  \section{Visibilità}
+
+    \subsection{Package}
+      Compilation unit ha come regola di visibilità il package, e serve ad avere file con nomi diverse che stanno nella stessa directory.
+
+      Noi possiamo distinguere all'interno del package classi che sono pubbliche nel package o private nel package, quelle che sono pubbliche nel package vengono chiamate friendly e il loro identifier non è mostrato.
+    \subsection{Compilation Unit}
+      Un file contiene la dichiarazione di una o più classi/interfacce, ma una sola di queste classi può essere dichiarata pubblica e deve avere lo stesso nome del file.
+      C'è al più un metodo main. (Il professore sconsiglia di avere un main per ogni classe, il TIJ fa il contrario).
+    \subsection{Visibility}
+      public:
+      \begin{itemize}
+        \item Visibili a tutti attraverso l'input del package
+        \item Il file deve avere lo stesso nome della classe pubblica
+        \tem al più una public class per ogni compilation unit/file
+      \end{itemiza}
+      
+      ``friendly''
+      \begin{itemize}
+        \item sono visibili solo all'interno dello stesso package/compilation/unit
+        \item possono stare in un file con altre classi
+      \end{itemize}
+    
+    \subsection{Attributi e metodi}
+      Attributi e metodi di una classe vengono sempre ereditati e possono essere:
+      \begin{itemize}
+        \item public, sono visibili a tutti
+        \item private, sono visibili all'interno della classe, non sono visibili nelle sottoclassi
+        \item protected, sono visibili alle classi nello stesso package, sono visibili anche nelle sottoclassi
+        \item ``friendly'', sono visibili alle classi nello stesso package, sono visibili solo alle sottoclassi nello stesso package. ``friendly'' non è una parola di java, viene usata per la prima volta da Bruce Eckel all'interno di TIJ.
+      \end{itemize}
+
+  \section{Polimorfismo}
+    Una classe definisce un tipo. Una sottoclasse definisce un sottotipo. Un oggetto del sottotipo è sostitibile a un oggeto del tipo
+
+    Un oggetto del sottotipo è sostituibile ad un oggetto del tipo.
+
+    Si distingue tra:
+      \begin{itemize}
+        \item tipo statico. Il tipo dichiarato
+        \item tipo dinamico. il tipo dell'oggetto attualmente assegnato.
+      \end{itemize}
+
+      Esempio:
+      \begin{lstlisting}
+        public class UsaAutomobile {
+          public static void partenza(Automobile p) {
+            if (p.puoPartire())
+              p.accendi()
+          }
+
+          public static void main(String[] args) {
+            Automobile myCar = new AutomobileElettrica(``T'');
+            partenza(myCar);
+          }
+        }
+
+      \end{lstlisting}
+
+      In java una variabile di qualsiasi tipo T può riferirsi a un qualunque oggetto di tipo T o a una sua qualunque sottoclasse.
+
+    \subsection{Tipo statico e tipo dinamico}
+      Il tipo statico è quello definito in dichiarazione. Il metodo dinamico si cambia con il costruttore.
+
+      Il compilatore in generale non definisce il metodo ma cerca dinamicamente il codice in base a come è defito dinamicamente (ora mi verrebbe da chiedere cosa sarebbe costato aggiungere le lambda).
+
+
+      
+  \section{* Astratti}
+    Un metodo è astratto quando non viene specificata l'implementazione.
+
+    Una classe è astratta se viene definito almeno un metodo astratto.
+
+    Non è possibile creare istanza di una classe astratta. E' utile per definire astrazioni di alto livello.
+
+    \begin{lstlisting}
+      abstract class Shape {
+        static Screen screen = new Screen();
+        Shape() {}
+        abstract void show();
+      }
+
+      class Circle extends Shape {
+        void show() {
+        }
+      }
+    \end{lstlisting}
+
+    Shape s = new Shape(); // Errato
+    Circle c = new Circle(); // Corretto
+    Shape s = new Circle(); // Corretto in quanto abbiamo l'interfaccia
+
+    \section{Final}
+      Final permette di bloccare un metodo/variabile o un'intera classe da essere modificata nei figli successivi.
+\end{document}
+

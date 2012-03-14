@@ -1,0 +1,237 @@
+\documentclass[a5paper]{article}}
+
+% Load packages
+\usepackage[latin1]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[italian,english]{babel}
+
+% Set the title
+\author{Andrea Brancaleoni}
+\title{Lezione6}
+\date{2012/03/14 10:28:30}
+
+% Start Document
+\begin{document}
+  \maketitle
+
+  \section{Ereditarietà}
+    \subsection{Limiti dell'ereditarietà semplice}
+      \begin{itemize}
+        \item L'ereditarietà semplice non permette la descrizione di numerose situazioni reali. Ad esempio supponiamo di avere una classe Giocattoo ed una classe Automobili. In assenza di ereditarietà multipla non posso definire la classe AutomobileGiocattolo
+        \item La soluzione java distingue tra una gerarchia di ereditarietà (semplice) ed una gerarchia di implementazione (multipla) introducendo il costrutto interface. Non avendo l'ereditarietà multipla sulle classi abbiamo l'ereditarietà multipla su un nuovo concetto detto interfaccia.
+      \end{itemiz
+
+    \subsection{Interfacce}
+      Dovrebbero essere la sublimazione dell'information hiding. Nascondiamo a un probabile utilizzatore. E' un oggetto i cui metodi sono tutti astratti, gli attributi sono static e finale per definizione. Questo vuol dire che io sto semplicemente dichiarando attraverso un'interfaccia le parti che voglio condividere.
+
+      Una volta che ho definito l'interfaccia dovrò definire anche l'implementazione di questa interfaccia.
+
+      Serve a disaccoppiare cosa avviene da come implementiamo poi il nostro codice. Le classi astratte servono a gestire Late binding, polimorfismo ed ereditarietà.
+
+      \begin{lstlisting}
+        interface <nome> extends <nome1>, <nome2> \ldots {
+          \ldots
+        }
+      \end{lstlisting}
+
+      \begin{lstlisting}
+        public interface Shape {
+          public String baseclass = ``shape'';
+          public void draw( );
+        }
+
+        public class Circle implements Shape {
+          public void draw() {
+            System.out.println(``Drawing Circle here'');
+          }
+        }
+
+        public class Main {
+          public static void main(String[] args) {
+            Shape circleshape = new Circle(); // Una interfaccia come le classi astratte non possono essere istanziate. L'unica cosa che posso fare è istanziare una classe che la implementa.
+            circleshape.draw(); // D'ora in poi posso usare solo i metodi definiti nell'interfaccia.
+          }
+        }
+      \end{lstlisting}
+
+    \subsection{Gerarchia delle implementazioni}
+
+      Una classe può implementare una o più interfacce ma estende 1 sola classe (di default essa è java.lang.Object)
+
+      Se la classe non è astratta deve fornire un'implementazione per tutti i metodi presenti nelle interfacce che implementa altrimenti essa viene detta astratta.
+
+  \section{I tre principi}
+    \subsection{Incapsulamento}
+      li oggetti nasconono il loro stato e parte del loro comportamento
+
+    \subsection{Ereditarietà}
+      Ogni sottoclasse eredit tutte le proprietà della/delle superclassi
+
+    \subsection{Polimorfismo}
+      Stessa interfaccia anche per dtipi di dati diversi.
+
+  \section{Conversioni automatiche di tipo}
+    \subsection{Promozioni}
+      \begin{itemize}
+        \item byte -> short, int long, float, double
+        \item short -> int, long, float, double
+        \item int -> long, float, double
+        \item long -> float, double
+        \item float -> double
+        \item double -> double
+        \item char -> int, long, float, double
+      \end{itemize}
+
+    \section{Casting}
+      Il casting è necessario quando non c'è la promozione di tipo automatica. Il cast potrebbe anche servire per fare tutto ciò che l'ereditarietà/polimorfismo non ci permette di fare.
+
+      Esempio:
+      \begin{lstlisting}
+        Animale a = \ldots;
+        Gatto mao = \ldots;
+        a = mao; //Ok assegnazione polimorfica
+        mao = (Gatto)a; // corretto ricastare su una classe successiva, staticamente e sintatticamente corretto, tuttavia potrebbero accadere problemi in dinamica.
+      \end{lstlisting}
+
+      Per scrivere un programma più robusto dovremmo usare l'operatore \emph{istanceof}
+
+      \begin{lstlisting}
+        Object a;
+        int i = System.in.read();
+        if (i > 0)
+          a = new String();
+        else
+          a = new Integer(5);
+
+        if (a instanceof String) return a.equals(``abcd'');
+      \end{lstlisting}
+
+      \subsection{instanceof e equals}
+        \begin{lstlisting}
+          public boolean equals(Object o) {
+            if (!(o instanceof Data)) return false; // risoluzione ricorrente
+            Data d = (Data)o;
+            return (giorno == d.giorno && mese == d.mese && anno == d.anno); 
+          }
+        \end{lstlisting}
+
+  \section{Container}
+    \subsection{ArrayList}
+      gli arraylist sono contenitori ``estendibili'' e ``accorciabili'' dinamicamente. Originariamente potevamo avere un ArrayList (prima vector) che per essere generico era un contentitore di Object. Questo aveva 2 problemi:
+      \begin{itemize}
+        \item Potevamo creare collezioni che potevano contenere ``tutto''
+        \item Avendo degli object per poterli usare si doveva ricastare ogni elemento dell'array.
+      \end{itemize}
+
+      In java dalla versione 5 in poi hanno introdotto i Generics. In realtà qualcuno ha definito la classe ArrayList a meno di un parametro.
+
+      \begin{lstlisting}
+        import java.util.ArrayList;
+
+        ArrayList<Person> team = new ArrayList<Person>(); // quello che mettiamo nel generics deve essere una classe e non può essere un tipo base.
+
+        team.add(new Person(``Bob''));
+        team.add(new Person(``Joe''));
+
+        team.size();
+      \end{lstlisting}
+
+      L'esempio sopra definisce un contenitore con una relazione d'ordine che mi permetta di gestire nth elementi senza pensare di allocare espandere o preoccuparmi della memoria.
+
+      metodi esposti:
+      \begin{itemize}
+        \item size() -> mi da la dimensione del contentuto e non la dimensioen del contentitore
+        \item add(element) -> aggiunge un elemento all'arraylist, la add è additiva e aggiunge un elemento.
+        \item add(ith, element) -> aggiunge un elemento in poszione ith.
+        \item get(ith) -> prende l'elemento i-esimo
+        \item set(ith, content) -> mi consente di mettere un elemento in una posizione particolare. la set è sostitutiva.
+        \item remove(ith) -> rimuove l'elemento iesimo.
+      \end{itemize}
+
+      ovviamente posso usare il foreach con l'arraylist.
+
+  \section{Generics}
+    \begin{lstlisting}
+      List<String> ls = new ArrayList<String>(); // Corretto, poiche ArrayList implementa la List
+      List<Object> lo = ls; // ERRORE DI COMPILAZIONE
+      lo.add(new Object());+
+      String s = ls.get(0); // ERRORE: tenta di assegnare un Object a una string!
+    \end{lstlisting}
+
+    Se Gen<T> è una classe generica e ClassB è una sottoclasse di ClassA, allora Gen<ClassB> non è sottoclasse di Gen<ClassA>. In realtà potremmo usare i generici anche per scrivere e non solo per creare dei tipi.
+
+    Supponiamo di voler scrivere un metodo statico che faccia da conversione tra un'array e una collezione.
+
+    \begin{lstlisting}
+      static <T> void fromArrayToCollection(T[] a, Collection<T> c) {
+        for (T o : a) { c.add(o); }
+      }
+    \end{lstlisting}
+
+    Esempio:
+    \begin{lstlisting}
+      String[] sa = new String[100];
+      Collection<String> cs = new ArrayList<String>( );
+      fromArrayToCollection(sa, cs);
+      Collection<Object> co = new ArrayList<Object>( );
+      fromArrayToCollection(sa, co;
+      Integer[ ] ia = new Integer[100];
+      fromArrayToCollection(ia, cs);
+    \end{lstlisting}
+
+  \section{IO Formattato}
+    \subsection{Input}
+      Anche l'input è molto carino ma non è simmetrico rispetto all'output.
+
+      System.in, dobbiamo definire un oggetto di appoggio dalla classe Scanner che ci offre i seguenti metodi:
+      \begin{itemize}
+        \item nextLine
+        \item next
+        \item nextInt
+        \item nextDouble
+        \item hasNext
+        \item hasNextInt
+        \item hasNextDouble \ldots
+      \end{itemize}
+
+      Esempio:
+      \begin{lstlisting}
+        public static void main(String[ ] args) {
+          Scanner in = new Scanner(System.in);
+          System.out.println(``Come ti chiami?'');
+          String nome = in.nextLine( );
+          System.out.println(``Quanti anni hai?'');
+          int eta = in.nextInt( );
+          System.out.println(``Ciao '' + nome + `` tra un anno avrai '' + (eta + 1) + `` anni'');
+      \end{lstlisting}
+    \subsection{Output}
+      - System.out.println( );
+      - System.out.printf( );
+
+  \section{Eccezioni}
+    Situazione in cui il programma ha un comportamento eccezionale. Il programma deve poter segnalare l'impossibilità di procedere nel produrre il risultato al chiamante con un metodo coerente senza utilizzare lo stesso meccanismo di ritorno.
+
+    Soluzioni:
+    \begin{itemize}
+      \item Terminazione del programma, come molte funzioni C
+      \item Restituire un valore, come ad esempio un -1 o valori simili. Tuttavia se usiamo un valore convenzionale da scegliere abbiamo un codominio dei valore di output ridotto.
+      \item Variabile globale che dice che c'è stato un errore. Anche questo comporta dei problemi quando c'è più di un thread in più dovrei controllare quasi ogni istruzione se è successo qualcosa di errato. Gestione centralizzata.
+      \item Meccanismo di eccezione come un elemento del linguaggio. Anziche dire che un metodo o termina o si pianta, abbiamo anche la possiblità che lanci un'eccezione, cioè ci faccia sapere che qualcosa di storto si sia verificato. Vuol dire segnalare al chiamante che qualcosa di strano si è verificato. In questo caso il chiamante ha la possibilità di gestire come vuole l'eccezione
+    \end{itemize}
+
+    In java abbiamo gli oggetti eccezione che se vengono sollevate vengono comunicate al chiamante.
+
+    Esempio:
+    \begin{lstlisting}
+      try {
+        \ldots
+      } catch (DivisionByZeroException e) {
+          // e è l'oggetto eccezione, qui viene inserito il codice di eccezione
+          // Qui siamo in grado di dire di fare qualcosa si verifica quell'eccezione.
+      }
+
+      // Qui vengono inserite le istruzioini successive.
+
+    \end{lstlisting}
+\end{document}
+
