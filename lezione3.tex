@@ -16,15 +16,15 @@
   \maketitle
 
   \section{Argomenti}
-    I parametri base passati alle funzioni sono copiati, mentre quelli non base vengono passati per indirizzo.
+    I parametri base passati alle funzioni sono copiati, mentre quelli non base vengono passati per indirizzo. Di tutti gli oggetti possiamo accedere solamente per riferimento ad esso.
 
-    Per duplicare un oggetto ho bisogno di copiare a uno a uno i campi semplici. Le String poichè immutabili tuttavia hanno l'efficienza dei ref e la comodità dei tipi base.
-
-  \section{Attributi}
+    Per duplicare un oggetto ho bisogno di copiare a uno a uno i campi semplici. Le String poichè immutabili hanno il vantaggio di poter essere copiate per riferimento senza aver la paura di poter essere modificate da un diavoletto malvagio.
+  
+  \section{Attributi Statici}
     \begin{itemize}
       \item possiamo accedere a tutti gli oggetti della classe se è definito l'attributo statico.
-      \item Tutti gli oggetti possono accedere agli attributi statici e tutti possono modificarlo
-      \item usato ad esempio quando si vuole mettere un contatore (per esempio di istanza)
+      \item Tutti gli oggetti possono accedere agli attributi statici e tutti possono modificarlo.
+      \item usato ad esempio quando si vuole mettere un contatore (per esempio di istanza).
       \item Possiamo fare la stessa cosa per i metodi, un metodo è statico quando può essere invocato se non c'è bisogno di un oggetto a se associato per essere invocato. Per questo motivo all'interno di esso non è definito l'oggetto $this$.
         \begin{itemize}
           \item potremmo o invocarlo all'interno delle funzioni dei metodi, oppure dovremmo usarlo premettendo il nome della classe, <NomeClasse>.<Nomemetodo>
@@ -54,9 +54,6 @@ E
 
   \section{Enum}
     Dalla versione 6 di Java si possono creare dei tipi enumerati, sono immutabili e non istanziabili
-
-  \section{End}
-    Alla prossima puntata. Overloading di metodi la prossima volta.
 
 \end{document}
 

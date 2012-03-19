@@ -18,7 +18,7 @@
     una sottoclasse può ridefinire l'implementazione di un metodo, tuttavia:
     \begin{itemize}
       \item L'intestazione del metodo non deve cambiare
-      \item \sout{L'intestazine non unclude il tipo retituito, che quindi può cambiare con la regola della covarianza.} Non la vedremo durante il corso quindi useremo la prima delle due regole
+      \item \sout{L'intestazine non include il tipo retituito, che quindi può cambiare con la regola della covarianza.} Non la vedremo durante il corso quindi useremo solo la prima delle due regole.
     \end{itemize}
 
     \begin{lstlisting}
@@ -27,8 +27,7 @@
         public voi ricarica() { batterieCariche = true; }
           . . .
 
-        /* @override */
-
+        @Override
         public void accendi() {
         }
       }
@@ -39,10 +38,10 @@
   \section{Super}
     In java abbiamo anche un'altra variabile speciale oltre a this. Il suo nome è super ed è il modo per accedere da un sottometodo della sottoclasse ai metodi della superclasse.
 
-    E' possibile anche usarlo all'interno del costruttore richiamando super (senza riferimento a metodi della classe) applicato negli argomenti desiderati dal padre.
+    E' possibile anche usarlo all'interno del costruttore richiamando super (senza riferimento a metodi della classe) applicato negli argomenti desiderati da uno dei costruttori pubblici del padre.
 
   \section{Object}
-    Ogni classe che noi definiamo eredità in maniera
+    Ogni classe di cui non definiamo esplicitamente la classe Ancestor eredità dall'oggetto java.lang.Ojbect.
 
     La classe Object definisce i seguenti metodi:
     \begin{itemize}
@@ -52,7 +51,7 @@
     \end{itemize}
 
   \section{String}
-    L'implementazione in Java delle stringhe, ha una serie di metodi predefiniti ed è immutabile.
+    L'implementazione in Java delle stringhe, ha una serie di metodi predefiniti ed ogni sua istanza è immutabile.
 
     \begin{lstlisting}
       public class ProvaString {
@@ -81,10 +80,15 @@
         \item al più una public class per ogni compilation unit/file
       \end{itemize}
       
-      ``friendly''
+      ``friendly'':
       \begin{itemize}
         \item sono visibili solo all'interno dello stesso package/compilation/unit
         \item possono stare in un file con altre classi
+      \end{itemize}
+
+      private:
+      \begin{itemize}
+        \item Sono visibili solo all'interno dello stesso scope
       \end{itemize}
     
     \subsection{Attributi e metodi}
@@ -93,13 +97,11 @@
         \item public, sono visibili a tutti
         \item private, sono visibili all'interno della classe, non sono visibili nelle sottoclassi
         \item protected, sono visibili alle classi nello stesso package, sono visibili anche nelle sottoclassi
-        \item ``friendly'', sono visibili alle classi nello stesso package, sono visibili solo alle sottoclassi nello stesso package. ``friendly'' non è una parola di java, viene usata per la prima volta da Bruce Eckel all'interno di TIJ.
+        \item ``friendly'', sono visibili alle classi nello stesso package, sono visibili solo alle sottoclassi nello stesso package. ``friendly'' non è una parola di java, venne usata per la prima volta da Bruce Eckel all'interno di TIJ.
       \end{itemize}
 
   \section{Polimorfismo}
-    Una classe definisce un tipo. Una sottoclasse definisce un sottotipo. Un oggetto del sottotipo è sostitibile a un oggeto del tipo
-
-    Un oggetto del sottotipo è sostituibile ad un oggetto del tipo.
+    Una classe definisce un tipo. Una sottoclasse definisce un sottotipo. Un oggetto del sottotipo è sostitiubile a un oggeto del tipo superiore.
 
     Si distingue tra:
       \begin{itemize}
@@ -129,10 +131,8 @@
       Il tipo statico è quello definito in dichiarazione. Il metodo dinamico si cambia con il costruttore.
 
       Il compilatore in generale non definisce il metodo ma cerca dinamicamente il codice in base a come è defito dinamicamente (ora mi verrebbe da chiedere cosa sarebbe costato aggiungere le lambda).
-
-
       
-  \section{* Astratti}
+  \section{Astratti}
     Un metodo è astratto quando non viene specificata l'implementazione.
 
     Una classe è astratta se viene definito almeno un metodo astratto.
@@ -159,4 +159,3 @@
     \section{Final}
       Final permette di bloccare un metodo/variabile o un'intera classe da essere modificata nei figli successivi.
 \end{document}
-

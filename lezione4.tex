@@ -23,7 +23,7 @@
       \item Utile per definire funzioni con codice differente ma con effetti simili su tipi diversi.
     \end{itemize}
 
-    Noi sovraccarichiamo il nome, mentre in C il nome era identificatore di un comportamento. Quin dando solo il nome non siamo in grado di definire il comportamento ma dobbiamo pure conoscere i suoi parametri.
+    Noi sovraccarichiamo il nome, mentre in C il nome era identificatore di un comportamento. Guardando solo il nome non siamo in grado di definire il comportamento ma dobbiamo anche conoscere i suoi parametri.
 
     Molto interessante per un linguaggio ad oggetti per overload del costruttore ad esempio.
 
@@ -35,7 +35,7 @@
       }
     \end{lstlisting}
 
-    Ogni volta viene chiamata la funzione giusta
+    Ogni volta viene chiamata la funzione giusta. Tuttavia non possiamo avere
 
     \begin{lstlisting}
       public static void main(String[] args) {
@@ -109,7 +109,7 @@
 
       \begin{itemize}
         \item È possibile invocare un costruttore dall'interno di un altro tramite la notazione this.metodo.
-        \item Tuttavia this devee esser e la prima istruzione
+        \item Tuttavia this deve essere la prima istruzione.
       \end{itemize}
 
       \begin{lstlisting}
@@ -174,14 +174,14 @@
       \item Java fornisce delle classi predefinite.
         \begin{itemize}
           \item Integer, Character, Float, Long, Short, Double
-          \item Un oggetto Integer contiene un int, ma viene inizializzato solo con i costruttori, la classe Integer è immutabile.
+          \item Un oggetto Integer contiene un int, ma viene inizializzato solo con i costruttori, la classe Integer è immutabile, esattamente come la String e tutti le altri classi duali a i tipi base.
         \end{itemize}
     \end{itemize}
 
     Esempio:
     \begin{lstlisting}
       Integer i; // Il default è null
-      i = new Integer(5); // i è un rif. a un oggetto che contiene 5
+      i = new Integer(5); // i è un riferimento a un oggetto che contiene 5
       Integer x = i; // Due riferimenti che puntano allo stesso oggetto il cui contenuto è 5
       int y = x.intValue(); // Vecchio metodo
       i = y; // boxing automatico
@@ -194,16 +194,20 @@
     \begin{itemize}
       \item O non restituisce nulla (void), magari side effect
       \item oppure può restituire un valore
-      \item ritorna this, in questo caso è possibile la catena di invocazione.
+      \item ritorna this; in questo caso è possibile la catena di invocazione.
     \end{itemize}
 
     Esempio:
     \begin{lstlisting}
-      System.out.println(); // out è un attributo pubblico (statico) di classe System
+      System.out.println(); 
+      // out è un attributo pubblico 
+      // (statico) di classe System
       // La classe di out fornisce il metodo println();
 
       String b = new String(``Ciao'');
-      String a = b.substring(1).substring(2);
+      String a = b
+          .substring(1)
+          .substring(2);
       System.out.pringln(a);
 
       // L'operatore . è associativo a sinistra
@@ -243,7 +247,7 @@
     \end{lstlisting}
 
     \section{Ereditarietà}
-      Il professore insiste a chiamarlea ereditarietà e non eredità, immagino non voglia vedere la parola eredità nel compito.
+      Il professore insiste a chiamarla ereditarietà e non eredità, immagino non voglia vedere la parola eredità nel compito.
       \begin{itemize}
         \item è possibile stabilire una relazione di ``sottoclassi di'' fra le classi di un programma Java
           \begin{itemize}
@@ -259,7 +263,7 @@
       \subsection{Relazione di ereditarietà}
         \begin{itemize}
           \item La sottoclasse eredita tutta l'implementazione (attributi e metodi) della superclasse. Gli attributi e metodi della superclasse sono implicitamente definiti anche nella sottoclasse. Se andassimo per errore a definire nella sottoclasse un attributo con lo stesso nome della sottoclasse ci troveremmo con due attributi con lo stesso nome.
-          \item Una sottoclasse può aggiungere nuovi attributi, nuovi metodi ma può anche ridefinire i metodi che eredita dalla sueprclasse, ovviamente i metodi devono invariare numero e tipo dei parametri (ciò è detto overriding).
+          \item Una sottoclasse può aggiungere nuovi attributi, nuovi metodi ma può anche ridefinire i metodi che eredita dalla superclasse, ovviamente i metodi devono invariare numero e tipo dei parametri (ciò è detto overriding). Se ciò non accade questo è un semplice overloading.
         \end{itemize}
 
         Esempio:
@@ -281,7 +285,7 @@
           }
         \end{lstlisting}
 
-        Gerarchia a più livelli, in java il figlio può avere al più un padre.
+        Gerarchia a più livelli, in java il figlio può avere al più un ancestors benchè non possa avere più di un singolo padre.
         // Disegno1
 
 
