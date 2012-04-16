@@ -1,0 +1,73 @@
+\documentclass[a5paper]{article}
+
+% Load packages
+\usepackage[latin1]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[italian,english]{babel}
+
+% Set the title
+\author{Andrea Brancaleoni}
+\title{Lezione9}
+\date{2012/04/16 13:31:59}
+
+% Start Document
+\begin{document}
+  \maketitle
+
+  \section{Design Pattern}
+    \subsection{Cosa sono?}
+      I problemi incontrati nello sviluppo di grossi progetti software sono spesso ricorrenti e prevedibili. I design pattern sono ``schemi di soluzioni'' ricorrenti. Permettono di non inventre da capo soluzioni ai problemi già risolti, ma di utilizzare dei ``mattoni'' di provata efficacia. Tuttavia possono rendere la struttura del progetto/codice più complessa del necessario.
+
+      tre tipi:
+      \begin{itemize}
+        \item P. Creazionali, creare oggetti
+        \item P. strutturali, strutturare il codice
+        \item P. Comportamentali, quali sono i metodi che una class deve offrire.
+      \end{itemize}
+
+    \subsection{P. Creazionali}
+      Il codice di un programma ad oggetti per lo più non dipende dalla classi precisa a cui appartiene un certo oggetto. I programmi richiedono a un oggetto solo il rispetto del ``contratto'' corrispondente alla sua specifica (il tipo). Limitare le dipendenze delle classi è desiderabile perchè permette di sostituire un'implementazione con un'altra.
+
+      \subsubsection{Factory}
+        Nasconde la creazione in un medoto detto factory. Restituisce una istanza senza essere costruttore della classe.
+
+        Il factory pattern è utilizzato quando si definisce un iteratore ad esempio.
+
+        Caratteristiche:
+        \begin{itemize}
+          \item Il costruttore è protected o private
+          \item La creazione è possibile invocando un metodo pubblico statico, detto factory: restituisce un oggetto di una classe senza essere costruttore di quella classe.
+        \end{itemize}
+
+      \subsubsection{Singleton}
+        Vogliamo essere certi che nel nostro sistema a runtime ci possa essere uno e un solo oggetto di quella classe a Runtime.
+
+        \begin{lstlisting}
+          public class Singleton {
+            private static Singleton s;
+
+            private Singleton() {}
+
+            public static Singleton getObject() {
+              if (s &=&  null) s = new Singleton();
+              return s;
+            }
+          }
+        \end{lstlisting}
+
+      \subsubsection{Adapter}
+        Vogliamo adattare interfacce diverse. Creiamo un Oggetto Adapter che implemente una interfaccia particolare.
+
+      \subsubsection{Proxy}
+        Posporre o addirittura evitare l'istanziamento di oggetti ``pesanti'' se non necessaria. Si interpone un oggetto (Proxy) con la stessa interfaccia dell'oggetto ``pesante''. L'oggetto può fare preprocessing (es. compressione dati perchè l'oggetto ``pesante'' è su un server remoto. A volte l'oggetto può rispondere alle richieste direttamente.
+
+      \subsubsection{Strategy}
+        Utile dove è necessario modificare dinamicamente gli algoritmi utilizzati da una applicazione. Encapsula l'algoritmo in un oggetto. Poi grazie a polimorfismo e late binding potremo andare a modificare in successione l'oggetto e di conseguenza l'algoritmo.
+
+        Tuttavia abbiamo il limite che la classe astratta deve esporre la stessa interfaccia.
+
+      \subsubsection{Decorator}
+        Aggiunge delle caratteristiche a runtime senza però cambiare l'oggetto stesso.
+
+\end{document}
+
